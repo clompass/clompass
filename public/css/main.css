@@ -1,0 +1,21 @@
+@font-face {
+  font-family: Clompass;
+  src: url("../font/clompass-sans.woff2");
+}
+* {
+  font-family: Clompass;
+}
+
+body {
+  background-color: #222;
+}
+
+#timetable {
+  border: 5px solid white;
+}
+#timetable article {
+  background-color: #AAA;
+}
+#timetable article h1 {
+  color: black;
+}

@@ -10,11 +10,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 /* Allow access to files */
-app.use("/", express.static(path.join(__dirname, "../client")));
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 /* Redirect to index file */
 app.get('/', (req, res) => {
-  res.send(fs.readFileSync(path.join(__dirname, "../client/index.html")).toString());
+  res.send(fs.readFileSync(path.join(__dirname, "./index.html")).toString());
 });
 
 /* Set up server */

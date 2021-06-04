@@ -1,7 +1,7 @@
 {
   "name": "clompass-server",
   "version": "1.0.0",
-  "description": "Clompass (Clompass) Server testing",
+  "description": "Clompass: A (supposedly) better version of Compass School Manager",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,9 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "atob": "^2.1.2",
     "express": "^4.17.1",
     "fnct": "^1.1.26",
-    "puppeteer": "^10.0.0",
     "ws": "^7.4.6"
   }
 }

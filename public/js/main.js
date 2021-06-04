@@ -25,13 +25,14 @@ function login() {
     type: "GET",
     name: "timetable",
     time: Date.now(),
-    username: doc.id("username").value,
-    password: doc.id("password").value,
+    username: btoa(doc.id("username").value),
+    password: btoa(doc.id("password").value),
   }));
 }
 
+/* Run on load */
 function init() {
-  setTimetable();
+  // setTimetable();
 }
 
 /* Format timetable in HTML */

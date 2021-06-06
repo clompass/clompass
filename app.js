@@ -51,15 +51,15 @@ app.listen(port, () => {
 /* Get timetable */
 function getTimetable(username, password) {
   return new Promise(async resolve => {
-    console.log("Request sent from user {0}****".format(username.s(0, 3)));
     /* 'Decrypt' username / password */
     username = atob(username);
     password = atob(password);
+    console.log("Request sent from user {0}****".format(username.s(0, 3)));
 
     /* Open browser in puppeteer and navigate to website */
     console.log("Opening Browser...");
     /* Change headless to true to see browser */
-    browser = await puppeteer.launch({headless: true, defaultViewport: null, args: ["--start-maximized"]});
+    browser = await puppeteer.launch({headless: true, defaultViewport: null, args: ["--start-maximized", "--no-sandbox"]});
     [page] = await browser.pages();
     await page.goto("https://lilydaleheights-vic.compass.education/");
 

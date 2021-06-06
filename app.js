@@ -31,7 +31,7 @@ const wss = new WebSocketServer({
   server: httpServer,
 });
 httpServer.listen(8081);
-wss.on('connection', (ws) => {
+wss.on("connection", (ws) => {
   ws.on("message", async (msg) => {
     msg = JSON.parse(msg);
     if (msg.type && msg.name) {
@@ -75,7 +75,7 @@ async function getTimetable(username, password) {
   console.log("Request sent from user {0}****".format(username.s(0, 3)));
 
   console.log("Opening Browser...");
-  browser = await puppeteer.launch({headless: true, defaultViewport: null, args: ['--start-maximized']});
+  browser = await puppeteer.launch({headless: true, defaultViewport: null, args: ["--start-maximized"]});
   [page] = await browser.pages();
   console.log("Opening Page...");
   await page.goto("https://lilydaleheights-vic.compass.education/");

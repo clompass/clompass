@@ -7,6 +7,7 @@ var ws = new WebSocket(HOST);
 ws.onerror = function (err) {
   console.error(err);
 };
+ws.onopen = login;
 ws.onmessage = function (event) {
   event = JSON.parse(event.data);
   if (event.type && event.name) {

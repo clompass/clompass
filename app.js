@@ -2,8 +2,6 @@
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
-const http = require("http");
-const WebSocketServer = require("ws").Server
 const puppeteer = require("puppeteer");
 const atob = require("atob");
 const F = require("fnct");
@@ -19,53 +17,15 @@ app.get("/", (req, res) => {
   res.send(fs.readFileSync(path.join(__dirname, "public/html/home.html")).toString());
 });
 
+/* Communication */
+app.post("/test", (req, res) => {
+  console.log("Request");
+  res.sendStatus(200);
+});
+
 /* Set up server */
 app.listen(port, () => {
   console.log("Listening at {0}".format(process.env.PORT ? "https://clompass.herokuapp.com" : "http://localhost:" + port));
-});
-
-
-/* Websocket communication */
-const httpServer = http.createServer(app);
-const wss = new WebSocketServer({
-  server: httpServer,
-});
-httpServer.listen(8081);
-wss.on("connection", (ws) => {
-  ws.on("message", async (msg) => {
-    msg = JSON.parse(msg);
-    if (msg.type && msg.name) {
-      switch (msg.type.upper()) {
-        case "GET": {
-          switch (msg.name.lower()) {
-            case "timetable": {
-              timetable = await getTimetable(msg.username, msg.password);
-              ws.send(JSON.stringify({
-                type: "RETURN",
-                name: "timetable",
-                time: Date.now(),
-                data: timetable,
-              }));
-            }; break;
-            case "user": {
-              filepath = path.join(__dirname, "user.txt");
-              if (fs.existsSync(filepath)) {
-                ws.send(JSON.stringify({
-                  type: "RETURN",
-                  name: "user",
-                  time: Date.now(),
-                  data: fs.readFileSync(filepath).toString().split("\r\n"),
-                }));
-              }
-            }; break;
-          }
-        }; break;
-      }
-    }
-  });
-  ws.on("end", () => {
-    console.error("Connection ended...");
-  });
 });
 
 /* Get timetable */

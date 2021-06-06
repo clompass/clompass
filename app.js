@@ -59,7 +59,15 @@ function getTimetable(username, password) {
     /* Open browser in puppeteer and navigate to website */
     console.log("Opening Browser...");
     /* Change headless to true to see browser */
-    browser = await puppeteer.launch({headless: true, defaultViewport: null, args: ["--start-maximized", "--no-sandbox"]});
+    browser = await puppeteer.launch({
+      headless: true,
+      defaultViewport: null,
+      args: [
+        "--start-maximized",
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+      ]
+    });
     [page] = await browser.pages();
     await page.goto("https://lilydaleheights-vic.compass.education/");
 

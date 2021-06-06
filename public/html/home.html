@@ -2,12 +2,19 @@
 <html>
   <head>
     <title>Clompass</title>
-    <link rel="stylesheet" href="public/css/main.css">
-    <link rel="shortcut icon" type="image/svg+xml" href="svg/icon.svg">
-    <script type="text/javascript" src="https://fnctjs.github.io/index.js"></script>
+    <link rel="stylesheet" href="public/css/main.css" />
+    <link rel="shortcut icon" type="image/svg+xml" href="svg/icon.svg" />
+    <script
+      type="text/javascript"
+      src="https://fnctjs.github.io/index.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-latest.min.js"
+    ></script>
     <script type="text/javascript" src="public/js/main.js" defer></script>
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="utf-8" http-equiv="encoding">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <meta content="utf-8" http-equiv="encoding" />
   </head>
   <body onload="init()">
     <h1>Clompass</h1>
@@ -25,15 +32,14 @@
     <button onclick="login()">Login</button>
     <details open>
       <summary>Login Details</summary>
-      <input id="username" type="text" placeholder="ABC0012">
+      <input id="username" type="text" placeholder="ABC0012" />
       <label>Username</label>
-      <br>
-      <input id="password" type="password" placeholder="P@$$W0rD">
+      <br />
+      <input id="password" type="password" placeholder="P@$$W0rD" />
       <label>Password</label>
     </details>
 
     <!-- Timetable goes here -->
-    <section id="timetable">
-    </section>
+    <section id="timetable"></section>
   </body>
 </html>

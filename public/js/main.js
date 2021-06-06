@@ -5,18 +5,31 @@ ws.onerror = function (err) {
 };
 ws.onmessage = function (event) {
   event = JSON.parse(event.data);
-  if (event.type == "RETURN") {
-    if (event.name == "timetable") {
-      console.log(event.data);
-      if (event.data) {
-        setTimetable(event.data);
-      }
+  if (event.type && event.name) {
+    switch (event.type.upper()) {
+      case "RETURN": {
+        switch (event.name.lower()) {
+          case "timetable": {
+            if (event.data) {
+              setTimetable(event.data);
+            }
+          }; break;
+          case "user": {
+            if (event.data) {
+              $("#username")[0].value = event.data[0];
+              $("#password")[0].value = event.data[1];
+              login();
+            }
+          }; break;
+        }
+      }; break;
     }
   }
 };
 ws.onclose = function () {
   console.error("Connection is closed...");
 }
+ws.onopen = getUser;
 
 /* Send login request to server */
 function login() {
@@ -30,6 +43,15 @@ function login() {
   }));
 }
 
+/* Get user details for testing */
+function getUser() {
+  ws.send(JSON.stringify({
+    type: "GET",
+    name: "user",
+    time: Date.now(),
+  }));
+}
+
 /* Run on load */
 function init() {
   // setTimetable();
@@ -37,6 +59,7 @@ function init() {
 
 /* Format timetable in HTML */
 function setTimetable(timetable) {
+  console.log(timetable);
   if (!timetable) {
     timetable = Array.from({length: 4}, () => { });
   }

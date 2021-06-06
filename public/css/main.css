@@ -19,3 +19,7 @@ body {
 #timetable article h1 {
   color: black;
 }
+
+.disclaimer summary {
+  color: red;
+}

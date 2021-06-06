@@ -30,7 +30,6 @@ const httpServer = http.createServer(app);
 const wss = new WebSocketServer({
   server: httpServer,
 });
-console.log(httpServer);
 httpServer.listen(8081);
 wss.on("connection", (ws) => {
   ws.on("message", async (msg) => {

@@ -1,5 +1,5 @@
 /* Communicate with server */
-var HOST = location.origin.includes("localhost") ? "ws://127.0.0.1:8081" : location.origin.replace(/^http/, "ws");
+var HOST = location.origin.includes("localhost") ? "ws://127.0.0.1:8081" : location.origin.replace(/^http/, "ws").replace(/^wss/, "ws");
 var ws = new WebSocket(HOST);
 ws.onerror = function (err) {
   console.error(err);

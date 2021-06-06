@@ -4,7 +4,8 @@
 
 # Client
 
-# Tree
+# Files
  - Move server functions to seperate js files
+ - Add comments
 
 # Completed

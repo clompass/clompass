@@ -1,27 +1,37 @@
+/* Run on load */
+async function init() {
+  await getUser();
+  await login();
+  setTimetable();
+}
+
+function getUrl(path) {
+  return location.origin + "/" + path;
+}
+
 /* Send login request to server */
 function login() {
-  console.log("Loading...");
-  $.post(location.origin + "/test", {
-    type: "GET",
-    name: "timetable",
-    time: Date.now(),
-    username: btoa($("#username")[0].value),
-    password: btoa($("#password")[0].value),
+  return new Promise(resolve => {
+    console.log("Loading...");
+    $.get(getUrl("timetable"), {
+      username: btoa($("#username")[0].value),
+      password: btoa($("#password")[0].value),
+    }, (res) => {
+      console.log(res);
+      resolve(res);
+    });
   });
 }
 
 /* Get user details for testing */
 function getUser() {
-  // ws.send(JSON.stringify({
-  //   type: "GET",
-  //   name: "user",
-  //   time: Date.now(),
-  // }));
-}
-
-/* Run on load */
-function init() {
-  // setTimetable();
+  return new Promise(resolve => {
+    $.get(getUrl("user"), (res) => {
+      $("#username")[0].value = res[0];
+      $("#password")[0].value = res[1];
+      resolve();
+    });
+  });
 }
 
 /* Format timetable in HTML */
@@ -31,9 +41,9 @@ function setTimetable(timetable) {
     timetable = Array.from({length: 4}, () => { });
   }
 
-  /* doc.id("timetable").innerHTML = "";
+  ("#timetable").innerHTML = "";
   for (i = 0; i < timetable.length; i++) {
-    doc.id("timetable").innerHTML += `
+    ("#timetable").innerHTML += `
     <article>
       <h1>Time: {time}</h1>
       <h1>Code: {code}</h1>
@@ -46,5 +56,5 @@ function setTimetable(timetable) {
       room: "Unknown",
       teacher: "Unknown",
     });
-  } */
+  }
 }

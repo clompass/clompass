@@ -1,6 +1,6 @@
 {
   "name": "clompass-server",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A (supposedly) better version of Compass School Manager",
   "main": "app.js",
   "scripts": {

@@ -1,9 +1,13 @@
 /* Run on load */
 var then;
 async function init() {
+  $.get(getUrl("test"), {}, (res) => {
+    console.log(res);
+  });
   await getUser();
   then = Date.now();
   timetable = await login();
+  console.log(timetable);
   setTimetable(timetable);
 }
 
@@ -19,6 +23,7 @@ function login() {
       username: btoa($("#username")[0].value),
       password: btoa($("#password")[0].value),
     }, (res) => {
+      console.log(timetable);
       resolve(res);
     });
   });

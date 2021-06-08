@@ -42,6 +42,10 @@ app.get("/user", async (req, res) => {
   }
   res.sendStatus(405);
 });
+app.get("/test", async (req, res) => {
+  console.log("Sending response");
+  res.send("Response! " + Date.now());
+});
 
 /* Set up server */
 app.listen(port, () => {

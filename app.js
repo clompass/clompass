@@ -127,7 +127,7 @@ function getTimetable(username, password) {
 
     /* Finish */
     browser.close();
-    console.log("Done.");
+    console.log("Done. (Subject count: {0})".format(subjects.length));
     resolve(subjects);
   });
 }

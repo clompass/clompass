@@ -23,7 +23,7 @@ function login() {
       username: btoa($("#username")[0].value),
       password: btoa($("#password")[0].value),
     }, (res) => {
-      console.log(timetable);
+      console.log(res);
       resolve(res);
     });
   });

@@ -1,9 +1,6 @@
 /* Run on load */
 var then;
 async function init() {
-  $.get(getUrl("test"), {}, (res) => {
-    console.log(res);
-  });
   await getUser();
   then = Date.now();
   timetable = await login();
@@ -51,6 +48,7 @@ function setTimetable(timetable) {
       teacher: "---",
     }));
   }
+  console.log(timetable);
 
   str = "";
   for (i = 0; i < timetable.length; i++) {

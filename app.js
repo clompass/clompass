@@ -60,6 +60,9 @@ function getTimetable(username, password) {
     console.log("Opening Browser...");
     /* Change headless to true to see browser */
     browser = await puppeteer.launch({
+      headless: true,
+      // headless: false,
+      defaultViewport: null,
       args: [
         "--start-maximized",
         "--no-sandbox",
@@ -100,20 +103,26 @@ function getTimetable(username, password) {
     /* Get innerText of subject display elements */
     console.log("Fetching subjects...");
     texts = await page.evaluate(() => {
-      els = document.querySelectorAll(".ext-evt-bd");
+      // els = document.querySelectorAll(".ext-evt-bd");
+      els document.getElementsByClassName("custom-event ext-cal-evt ext-cal-evr activity-type-1")
       texts = [];
       for (i = 0; i < els.length; i++) {
         texts.push(els[i].innerText);
       }
       return (texts);
     });
-    console.log(texts);
 
     /* Format subjects */
     subjects = [];
     for (i = 0; i < texts.length; i++) {
       a = texts[i].split(": ");
+      if (!a) {
+        continue;
+      }
       b = a[1].split(" - ");
+      if (!b) {
+        continue;
+      }
       subjects.push({
         time: a[0],
         code: b[1],

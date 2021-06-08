@@ -1,8 +1,9 @@
 /* Run on load */
+var then;
 async function init() {
   await getUser();
+  then = Date.now();
   timetable = await login();
-  console.log(timetable);
   setTimetable(timetable);
 }
 
@@ -18,7 +19,6 @@ function login() {
       username: btoa($("#username")[0].value),
       password: btoa($("#password")[0].value),
     }, (res) => {
-      console.log(res);
       resolve(res);
     });
   });
@@ -60,4 +60,5 @@ function setTimetable(timetable) {
     `;
   }
   $("#timetable").html(str);
+  console.log(`Loaded (${timetable.length}) subjects in ${(Date.now() - then) / 1000}s`);
 }

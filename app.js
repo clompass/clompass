@@ -54,14 +54,14 @@ function getTimetable(username, password) {
     /* 'Decrypt' username / password */
     username = atob(username);
     password = atob(password);
+    console.log("-".repeat(8));
     console.log("Request sent from user {0}****".format(username.s(0, 3)));
 
     /* Open browser in puppeteer and navigate to website */
     console.log("Opening Browser...");
-    /* Change headless to true to see browser */
     browser = await puppeteer.launch({
       headless: true,
-      // headless: false,
+      // headless: false, // Uncomment to see browser
       defaultViewport: null,
       args: [
         "--start-maximized",
@@ -91,20 +91,14 @@ function getTimetable(username, password) {
       el.disabled = false;
       el.click();
     });
-    while (true) {
-      await page.waitForNavigation();
-      try {
-        break;
-      } catch {
-        console.error("Failed");
-      }
-    }
+    // await page.waitForNavigation();
+    await F.sleep(5); //! Replace with proper wait function
 
     /* Get innerText of subject display elements */
     console.log("Fetching subjects...");
     texts = await page.evaluate(() => {
       // els = document.querySelectorAll(".ext-evt-bd");
-      els document.getElementsByClassName("custom-event ext-cal-evt ext-cal-evr activity-type-1")
+      els = document.getElementsByClassName("custom-event ext-cal-evt ext-cal-evr activity-type-1");
       texts = [];
       for (i = 0; i < els.length; i++) {
         texts.push(els[i].innerText);

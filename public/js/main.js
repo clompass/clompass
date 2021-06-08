@@ -1,8 +1,8 @@
 /* Run on load */
 async function init() {
   await getUser();
-  await login();
-  setTimetable();
+  timetable = await login();
+  setTimetable(timetable);
 }
 
 function getUrl(path) {
@@ -17,7 +17,6 @@ function login() {
       username: btoa($("#username")[0].value),
       password: btoa($("#password")[0].value),
     }, (res) => {
-      console.log(res);
       resolve(res);
     });
   });
@@ -36,25 +35,28 @@ function getUser() {
 
 /* Format timetable in HTML */
 function setTimetable(timetable) {
-  console.log(timetable);
+  // timetable = null;
   if (!timetable) {
-    timetable = Array.from({length: 4}, () => { });
+    timetable = Array.from({length: 4}, () => ({
+      time: "--:--",
+      code: "-----",
+      room: "--",
+      teacher: "---",
+    }));
   }
+  console.log(timetable);
 
-  ("#timetable").innerHTML = "";
+  str = "";
   for (i = 0; i < timetable.length; i++) {
-    ("#timetable").innerHTML += `
+    let {time, code, room, teacher} = timetable[i];
+    str += `
     <article>
-      <h1>Time: {time}</h1>
-      <h1>Code: {code}</h1>
-      <h1>Room: {room}</h1>
-      <h1>Teacher: {teacher}</h1>
+      <h1>Time: ${time}</h1>
+      <h1>Code: ${code}</h1>
+      <h1>Room: ${room}</h1>
+      <h1>Teacher: ${teacher}</h1>
     </article>
-    `.format({
-      time: "Unknown",
-      code: "Unknown",
-      room: "Unknown",
-      teacher: "Unknown",
-    });
+    `;
   }
+  $("#timetable").html(str);
 }

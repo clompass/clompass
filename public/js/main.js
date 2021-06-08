@@ -2,6 +2,7 @@
 async function init() {
   await getUser();
   timetable = await login();
+  console.log(timetable);
   setTimetable(timetable);
 }
 
@@ -44,7 +45,6 @@ function setTimetable(timetable) {
       teacher: "---",
     }));
   }
-  console.log(timetable);
 
   str = "";
   for (i = 0; i < timetable.length; i++) {

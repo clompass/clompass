@@ -13,9 +13,7 @@
     "atob": "^2.1.2",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "fnct": "^1.1.26"
-  },
-  "devDependencies": {
+    "fnct": "^1.1.26",
     "puppeteer": "^10.0.0"
   }
 }

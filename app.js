@@ -65,7 +65,7 @@ function getTimetable(username, password) {
     console.log("Opening Browser...");
     browser = await puppeteer.launch({
       headless: true,
-      headless: false, // Uncomment to see browser
+      // headless: false, // Uncomment to see browser
       defaultViewport: null,
       args: [
         "--start-maximized",

@@ -38,7 +38,7 @@ function getUser() {
         resolve();
       },
       error: (err) => {
-        console.error(error);
+        console.error(err);
       },
       timeout: 60000,
     });

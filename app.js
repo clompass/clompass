@@ -65,7 +65,7 @@ function getTimetable(username, password) {
     console.log("Opening Browser...");
     browser = await puppeteer.launch({
       headless: true,
-      // headless: false, // Uncomment to see browser
+      headless: false, // Uncomment to see browser
       defaultViewport: null,
       args: [
         "--start-maximized",
@@ -96,7 +96,8 @@ function getTimetable(username, password) {
       el.click();
     });
     // await page.waitForNavigation();
-    await F.sleep(5); //! Replace with proper wait function
+    //! Not working?
+    await page.waitForNavigation({waitUntil: "networkidle2"});
 
     /* Get innerText of subject display elements */
     console.log("Fetching subjects...");

@@ -30,10 +30,17 @@ function login() {
 /* Get user details for testing */
 function getUser() {
   return new Promise(resolve => {
-    $.get(getUrl("user"), (res) => {
-      $("#username")[0].value = res[0];
-      $("#password")[0].value = res[1];
-      resolve();
+    $.ajax({
+      url: getUrl("user"),
+      success: (res) => {
+        $("#username")[0].value = res[0];
+        $("#password")[0].value = res[1];
+        resolve();
+      },
+      error: (err) => {
+        console.error(error);
+      },
+      timeout: 60000,
     });
   });
 }

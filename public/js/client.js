@@ -1,11 +1,11 @@
 /* Run on load */
 var then;
+var table;
 async function init() {
   await getUser();
   then = Date.now();
-  timetable = await login();
-  console.log(timetable);
-  setTimetable(timetable);
+  table = await login();
+  setTimetable();
 }
 
 function getUrl(path) {
@@ -38,21 +38,21 @@ function getUser() {
 }
 
 /* Format timetable in HTML */
-function setTimetable(timetable) {
+function setTimetable() {
   // timetable = null;
-  if (!timetable) {
-    timetable = Array.from({length: 4}, () => ({
+  if (!table) {
+    table = Array.from({length: 4}, () => ({
       time: "--:--",
       code: "-----",
       room: "--",
       teacher: "---",
     }));
   }
-  console.log(timetable);
+  console.log(table);
 
   str = "";
-  for (i = 0; i < timetable.length; i++) {
-    let {time, code, room, teacher} = timetable[i];
+  for (i = 0; i < table.length; i++) {
+    let {time, code, room, teacher} = table[i];
     str += `
     <article>
       <h1>Time: ${time}</h1>
@@ -63,5 +63,5 @@ function setTimetable(timetable) {
     `;
   }
   $("#timetable").html(str);
-  console.log(`Loaded (${timetable.length}) subjects in ${(Date.now() - then) / 1000}s`);
+  console.log(`Loaded (${table.length}) subjects in ${(Date.now() - then) / 1000}s`);
 }

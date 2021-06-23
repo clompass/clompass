@@ -4,7 +4,9 @@ var table;
 async function init() {
   await getUser();
   then = Date.now();
+  console.log(1);
   table = await login();
+  console.log(table);
   setTimetable();
 }
 
@@ -20,7 +22,6 @@ function login() {
       username: btoa($("#username")[0].value),
       password: btoa($("#password")[0].value),
     }, (res) => {
-      console.log(res);
       resolve(res);
     });
   });

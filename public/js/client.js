@@ -1,13 +1,12 @@
 /* Run on load */
-var then;
-var table;
+var then, table, tasks;
 async function init() {
   await getUser();
   then = Date.now();
-  console.log(1);
   table = await login();
-  console.log(table);
   setTimetable();
+  tasks = await getTasks();
+  setTasks();
 }
 
 function getUrl(path) {
@@ -21,7 +20,18 @@ function login() {
     $.get(getUrl("timetable"), {
       username: btoa($("#username")[0].value),
       password: btoa($("#password")[0].value),
-    }, (res) => {
+    }, res => {
+      resolve(res);
+    });
+  });
+}
+
+function getTasks() {
+  return new Promise(resolve => {
+    $.get(getUrl("tasks"), {
+      username: btoa($("#username")[0].value),
+      password: btoa($("#password")[0].value),
+    }, res => {
       resolve(res);
     });
   });
@@ -72,4 +82,31 @@ function setTimetable() {
   }
   $("#timetable").html(str);
   console.log(`Loaded (${table.length}) subjects in ${(Date.now() - then) / 1000}s`);
+}
+
+function setTasks() {
+  if (!tasks) {
+    return;
+  }
+
+  str = "";
+  for (i = 0; i < tasks.length; i++) {
+    let {code, name, date, status} = tasks[i];
+    statuses = [
+      "receivedlate",
+      "ontime",
+      "pending",
+    ];
+    statusImage = "";
+    if (statuses.includes(status.toLowerCase().split(" ").join(""))) {
+      statusImage = `<img class="status" src="public/svg/task-status/${status.toLowerCase().split(" ").join("")}.svg" />`;
+    }
+    str += `
+    <article>
+      <p>${code} - ${name} - ${date} - ${status} <span>${statusImage}</span></p>
+    </article>
+    `;
+  }
+  $("#ltasks").html(str);
+  console.log(`Loaded (${tasks.length}) tasks in ${(Date.now() - then) / 1000}s`);
 }

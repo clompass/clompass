@@ -25,3 +25,11 @@ body {
 .disclaimer summary {
   color: red;
 }
+
+#ltasks article {
+  font-size: 18px;
+}
+#ltasks article img {
+  display: inline;
+  width: 20px;
+}

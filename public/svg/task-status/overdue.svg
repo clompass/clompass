@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <path d="
+    M 64 15
+    l -28 0
+    l -23 23
+    l 0 28
+    l 23 23
+    l 28 0
+    l 23 -23
+    l 0 -28
+    Z
+  " fill="#dd2113" stroke="#880b02" stroke-width="10" stroke-linejoin="round" />
+
+  <path d="
+    M 35 64
+    l 26 -26
+    l 4 4
+    l -26 26
+    Z
+    M 39 38
+    l 26 26
+    l -4 4
+    l -26 -26
+    Z
+  " fill="#f4d4d2" stroke="#f4d4d2" stroke-width="8" stroke-linejoin="round" />
+</svg>
